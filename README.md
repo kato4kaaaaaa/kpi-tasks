@@ -36,4 +36,14 @@ promiseFilter(data, isEven).then(result => console.log(result));  // [2, 4, 6]
 ```
 
 Async-Await Filter
+```
+const { asyncFilter } = require('./asyncFilter');
+
+const asyncIsEven = async num => num % 2 === 0;
+
+(async () => {
+  const result = await asyncFilter(data, asyncIsEven);
+  console.log(result);  // [2, 4, 6]
+})();
+```
 
