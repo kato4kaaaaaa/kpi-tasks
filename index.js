@@ -33,6 +33,10 @@ async function asyncFilter(array, callback, debounceTime = 0) {
   };
 
   console.log("Original array:", numbers);
+ const filteredNumbers = await asyncFilter(numbers, isEven);
+
+  console.log("Filtered array:", filteredNumbers); // Очікувано: [2, 4, 6]
+})();
 
   
 
