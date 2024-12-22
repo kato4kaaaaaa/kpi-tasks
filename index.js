@@ -13,4 +13,4 @@ async function asyncFilter(array, callback, debounceTime = 0) {
   const results = await Promise.all(array.map(async (item, index) => {
     const start = Date.now();
     const result = await callback(item, index, array);
-    const elapsed = Date.now() - start
+    const elapsed = Date.now() - start;
