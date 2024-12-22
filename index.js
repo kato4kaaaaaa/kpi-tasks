@@ -22,3 +22,8 @@ async function asyncFilter(array, callback, debounceTime = 0) {
     return result;
   }));
   return array.filter((_, idx) => results[idx]);
+// Демонстрація використання asyncFilter
+(async () => {
+  const numbers = [1, 2, 3, 4, 5, 6];
+  
+
