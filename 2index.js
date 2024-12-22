@@ -26,10 +26,23 @@ async function asyncFilter(array, callback) {
 }
 
 
-
-
 // parallelAsyncFilter.js
+async function parallelAsyncFilter(array, callback) {
+  const chunkSize = 2;
+  const chunks = [];
+  
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  
+  const results = await Promise.all(chunks.map(async chunk => {
+    return await Promise.all(chunk.map(callback));
+  }));
+  
+  return results.flat().filter(result => result);
+}
 
+module.exports = { promiseFilter, asyncFilter, parallelAsyncFilter };
 
 
 
