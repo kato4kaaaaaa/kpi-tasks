@@ -47,3 +47,19 @@ const asyncIsEven = async num => num % 2 === 0;
 })();
 ```
 
+Parallel Async Filter
+```
+const { parallelAsyncFilter } = require('./parallelAsyncFilter');
+
+const parallelIsEven = async num => num % 2 === 0;
+
+(async () => {
+  const result = await parallelAsyncFilter(data, parallelIsEven);
+  console.log(result);  // [2, 4, 6]
+})();
+```
+# Features
+
+Promise-based, Async-Await та Parallelism підтримка.
+
+
