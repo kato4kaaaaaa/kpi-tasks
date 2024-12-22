@@ -18,6 +18,12 @@ function promiseFilter(array, callback) {
 
 
 // asyncFilter.js
+async function asyncFilter(array, callback) {
+  const results = await Promise.all(array.map(async (item, index) => {
+    return await callback(item, index, array);
+  }));
+  return array.filter((_, idx) => results[idx]);
+}}
 
 
 
