@@ -23,7 +23,7 @@ async function asyncFilter(array, callback) {
     return await callback(item, index, array);
   }));
   return array.filter((_, idx) => results[idx]);
-}}
+}
 
 
 
