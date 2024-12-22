@@ -19,3 +19,20 @@ Features
 
 Debounce: Опціональна затримка для операцій фільтрації.
 Async Operations: Обробка асинхронних операцій всередині функції фільтрації.
+
+
+Task 2
+
+Example 
+
+Promise-based Filter
+
+const { promiseFilter } = require('./promiseFilter');
+
+const data = [1, 2, 3, 4, 5, 6];
+const isEven = num => Promise.resolve(num % 2 === 0);
+
+promiseFilter(data, isEven).then(result => console.log(result));  // [2, 4, 6]
+
+
+
