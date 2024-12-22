@@ -14,3 +14,11 @@ async function asyncFilter(array, callback, debounceTime = 0) {
     const start = Date.now();
     const result = await callback(item, index, array);
     const elapsed = Date.now() - start;
+// Додатковий debounce, якщо виконання було швидким
+    if (debounceTime > 0 && elapsed < debounceTime) {
+      await new Promise((resolve) => setTimeout(resolve, debounceTime - elapsed));
+    }
+
+    return result;
+  }));
+  return array.filter((_, idx) => results[idx]);
