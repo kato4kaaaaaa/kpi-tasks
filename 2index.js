@@ -11,8 +11,10 @@
 
 
 // promiseFilter.js
-
-
+function promiseFilter(array, callback) {
+  return Promise.all(array.map(callback))
+    .then(results => array.filter((_, idx) => results[idx]));
+}
 
 
 // asyncFilter.js
