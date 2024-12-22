@@ -25,5 +25,14 @@ async function asyncFilter(array, callback, debounceTime = 0) {
 // Демонстрація використання asyncFilter
 (async () => {
   const numbers = [1, 2, 3, 4, 5, 6];
+
+// Асинхронний колбек для перевірки парності чисел
+  const isEven = async (num) => {
+    await new Promise((resolve) => setTimeout(resolve, 100)); 
+    return num % 2 === 0; // Парні числа
+  };
+
+  console.log("Original array:", numbers);
+
   
 
