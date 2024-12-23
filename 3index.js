@@ -50,4 +50,11 @@ abortableFilter(data, isEvenWithAbort, controller).then(result => {
   console.log("Результат:", result);  
 }).catch(err => console.error(err));
 
+setTimeout(() => {
+  console.log("Операцію скасовано"); 
+  controller.abort();
+}, 1000);
+
+module.exports = { abortableFilter };
+
 
