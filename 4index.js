@@ -10,11 +10,11 @@ async function processLargeDataSet(dataIterator, processFn, batchSize = 10) {
         for await (const item of dataIterator) {
             batch.push(item);
 
-            // Коли досягаємо розміру пакета, обробляємо його
+            // Коли досягає розміру пакета, обробляє його
             if (batch.length === batchSize) {
                 const batchResult = await Promise.all(batch.map(processFn));
-                results = results.concat(batchResult); 
-                batch = [];
+                results = results.concat(batchResult); // Додає результати до основного масиву
+                batch = []; // Очищує пакет
             }
         }
 
@@ -36,9 +36,9 @@ function createLargeDataStream(size) {
         objectMode: true,
         read() {
             if (index < size) {
-                this.push(index++); 
+                this.push(index++); // Додає елемент до стріму
             } else {
-                this.push(null); 
+                this.push(null); // Позначає кінець стріму
             }
         }
     });
