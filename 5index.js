@@ -19,3 +19,13 @@ messageBus.on('syncOperation', (a, b) => {
     console.error('Помилка синхронної операції:', error);
   }
 });
+
+messageBus.emit('syncOperation', 5, 10);
+
+function fetchData(apiEndpoint) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`Дані з ${apiEndpoint}`);
+    }, 1000);
+  });
+}
