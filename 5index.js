@@ -3,11 +3,11 @@
 
 const EventEmitter = require('events');
 
-class ReactiveMessageBus extends EventEmitter {}
+class ReactiveMessageBus extends EventEmitter {} // Створення класу з EventEmitter
 
-const messageBus = new ReactiveMessageBus();
+const messageBus = new ReactiveMessageBus(); // Створення екземпляра ReactiveMessageBus
 
-function sum(a, b) {
+function sum(a, b) { // Синхронна операція
   return a + b;
 }
 
@@ -20,7 +20,7 @@ messageBus.on('syncOperation', (a, b) => {
   }
 });
 
-messageBus.emit('syncOperation', 5, 10);
+messageBus.emit('syncOperation', 5, 10); // Виклик синхронної операції
 
 function fetchData(apiEndpoint) {
   return new Promise((resolve, reject) => {
@@ -38,4 +38,4 @@ messageBus.on('asyncOperation', async (apiEndpoint) => {
   }
 });
 
-messageBus.emit('asyncOperation', '/api/data');
+messageBus.emit('asyncOperation', '/api/data'); // Виклик асинхронної операції
