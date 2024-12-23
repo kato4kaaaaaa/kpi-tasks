@@ -23,3 +23,23 @@ async function processLargeDataSet(dataIterator, processFn, batchSize = 10) {
             const batchResult = await Promise.all(batch.map(processFn));
             results = results.concat(batchResult);
         }
+} catch (err) {
+        console.error("Помилка обробки:", err);
+    }
+    return results;
+}
+
+// Функція для створення стріму великих даних
+function createLargeDataStream(size) {
+    let index = 0;
+    return new Readable({
+        objectMode: true,
+        read() {
+            if (index < size) {
+                this.push(index++); 
+            } else {
+                this.push(null); 
+            }
+        }
+    });
+}
