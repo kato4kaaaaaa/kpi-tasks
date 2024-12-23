@@ -111,3 +111,57 @@ processLargeDataSet(dataStream, fakeProcessing, 20)
 2. Дані обробляються пакетами фіксованого розміру для оптимізації обчислень.
 3. Використання `async/await` для одночасної обробки кількох елементів.
 4. Підтримка налаштування розміру пакетів і обробки кожного елемента.
+
+## Task 5
+
+# Example
+
+Ініціалізація EventEmitter
+```
+const EventEmitter = require('events');
+const ReactiveMessageBus = new (class extends EventEmitter {})();
+```
+
+Синхронна операція:
+```
+function sum(a, b) {
+  return a + b;
+}
+
+ReactiveMessageBus.on('syncOperation', (a, b) => {
+  try {
+    const result = sum(a, b);
+    console.log(`Результат суми: ${result}`);
+  } catch (error) {
+    console.error('Помилка синхронної операції:', error);
+  }
+});
+
+ReactiveMessageBus.emit('syncOperation', 5, 10);
+```
+
+Асинхронна операція:
+```
+function fetchData(apiEndpoint) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`Дані з ${apiEndpoint}`);
+    }, 1000);
+  });
+}
+
+ReactiveMessageBus.on('asyncOperation', async (apiEndpoint) => {
+  try {
+    const data = await fetchData(apiEndpoint);
+    console.log(`Отримані дані: ${data}`);
+  } catch (error) {
+    console.error('Помилка асинхронної операції:', error);
+  }
+});
+
+ReactiveMessageBus.emit('asyncOperation', '/api/data');
+```
+
+# Features 
+1. Синхронна операція виконується миттєво і повертає результат без затримок.
+2. Асинхронна операція імітує запит до API з використанням промісів.
