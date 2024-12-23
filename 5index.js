@@ -29,3 +29,13 @@ function fetchData(apiEndpoint) {
     }, 1000);
   });
 }
+messageBus.on('asyncOperation', async (apiEndpoint) => {
+  try {
+    const data = await fetchData(apiEndpoint);
+    console.log(`Отримані дані: ${data}`);
+  } catch (error) {
+    console.error('Помилка асинхронної операції:', error);
+  }
+});
+
+messageBus.emit('asyncOperation', '/api/data');
