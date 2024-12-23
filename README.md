@@ -89,3 +89,25 @@ abortableFilter(data, isEvenAsync)
 2. Дозволяє скасовувати операцію фільтрації на будь-якому етапі.
 3. Можливість використання затримки для симуляції асинхронних операцій.
 4. Легко адаптується для використання з різними типами даних.
+
+
+## Task 4
+
+# Example
+```
+const dataStream = createLargeDataStream(100); // Стрім на 100 елементів
+
+const fakeProcessing = async (num) => {
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 50)); 
+    return num * 2; // Проста операція
+};
+
+processLargeDataSet(dataStream, fakeProcessing, 20)
+    .then(results => console.log("Оброблені результати:", results))
+    .catch(err => console.error("Помилка:", err));
+```
+# Features 
+1. Робота з великими наборами даних, що поступово обробляються без перевантаження пам'яті.
+2. Дані обробляються пакетами фіксованого розміру для оптимізації обчислень.
+3. Використання `async/await` для одночасної обробки кількох елементів.
+4. Підтримка налаштування розміру пакетів і обробки кожного елемента.
