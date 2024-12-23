@@ -18,3 +18,21 @@ function abortableFilter(array, callback, controller) {
             try {
               callback(current, i, array, signal).then(res => {
                 results.push(res ? current : null);
+                resolve(res);
+              }).catch(err => {
+                console.log("Помилка", err); 
+                resolve(false);
+              });
+            } catch (e) {
+              console.error("Помилка у зворотному виклику", e); 
+              resolve(false);
+            }
+          }, Math.random() * 100); 
+        }
+      })
+    );
+  }
+  
+  return Promise.all(promises).then(() => results.filter(item => item !== null));
+}
+
