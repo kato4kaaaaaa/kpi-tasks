@@ -12,12 +12,12 @@ function abortableFilter(array, callback, controller) {
     promises.push(
       new Promise(resolve => {
         if (signal && signal.aborted) {
-          resolve(false);
+          resolve(false); // Якщо операцію скасовано, пропускаємо елемент
         } else {
           setTimeout(() => {
             try {
-              callback(current, i, array, signal).then(res => {
-                results.push(res ? current : null);
+              callback(current, i, array, signal).then(res => { // Виконуємо зворотний виклик
+                results.push(res ? current : null); // Додаємо елемент або null
                 resolve(res);
               }).catch(err => {
                 console.log("Помилка", err); 
@@ -33,21 +33,21 @@ function abortableFilter(array, callback, controller) {
     );
   }
   
-  return Promise.all(promises).then(() => results.filter(item => item !== null));
+  return Promise.all(promises).then(() => results.filter(item => item !== null));  // Чекаємо завершення всіх промісів і фільтруємо результати
 }
 
 const data = [1, 2, 3, 4, 5, 6];
 
 
-const controller = new AbortController();
+const controller = new AbortController(); // Аборт-контролер для управління скасуванням
 
 const isEvenWithAbort = (num, _, __, signal) => new Promise((resolve, reject) => {
   if (signal && signal.aborted) return resolve(false); 
   setTimeout(() => resolve(num % 2 === 0), Math.random() * 500); 
 });
 
-abortableFilter(data, isEvenWithAbort, controller).then(result => {
-  console.log("Результат:", result);  
+abortableFilter(data, isEvenWithAbort, controller).then(result => { // Виклик функції
+  console.log("Результат:", result); // Вивід результату
 }).catch(err => console.error(err));
 
 setTimeout(() => {
