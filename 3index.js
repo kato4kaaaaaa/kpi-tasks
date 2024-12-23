@@ -36,3 +36,18 @@ function abortableFilter(array, callback, controller) {
   return Promise.all(promises).then(() => results.filter(item => item !== null));
 }
 
+const data = [1, 2, 3, 4, 5, 6];
+
+
+const controller = new AbortController();
+
+const isEvenWithAbort = (num, _, __, signal) => new Promise((resolve, reject) => {
+  if (signal && signal.aborted) return resolve(false); 
+  setTimeout(() => resolve(num % 2 === 0), Math.random() * 500); 
+});
+
+abortableFilter(data, isEvenWithAbort, controller).then(result => {
+  console.log("Результат:", result);  
+}).catch(err => console.error(err));
+
+
